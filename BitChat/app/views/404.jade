@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title 404 Error
+  // /head
+  body
+    .container.text-center
+      .logo-404
+      .content-404
+        img.img-responsive(src='http://0.s3.envato.com/files/161763/Screenshots/01_white_color_scheme.__large_preview.jpg', alt='')
+        h2
+          a(href='http://localhost:3000/') Bring me back Home
+        h2 message: #{message}
+        h2 Error: #{error}
