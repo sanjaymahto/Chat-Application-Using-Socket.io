@@ -11,7 +11,8 @@ Make Sure MongoDB is running.
 Routes - 
 
 *For Login Screen http://localhost:3000/
-when prompt for UserName Enter your Name.
+
+*when prompt for UserName Enter your Name.
 
 
 #### Stack
