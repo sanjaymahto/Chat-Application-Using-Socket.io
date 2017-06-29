@@ -1,7 +1,29 @@
-# chat-example
+# Bit-Chat
+A Simple Chatting Application
 
-This is the source code for a very simple chat example used for 
-the [Getting Started](http://socket.io/get-started/chat/) guide 
-of the Socket.IO website.
+simple Chatting application where you can chat with others who are online in your chatRoom in Real-Time.
 
-Please refer to it to learn how to run this application.
+#### Setup
+`npm install` to install all dependencies from Package.Json file.
+
+Make Sure MongoDB is running.
+
+Routes - 
+
+*For Login Screen http://localhost:3000/
+when prompt for UserName Enter your Name.
+
+
+#### Stack
+Here's a quick list of the most important parts of the tech stack to involved in the application:
+- NodeJS
+- Express
+- MongoDB
+- Jade Templating Engine
+
+
+
+
+
+
+
