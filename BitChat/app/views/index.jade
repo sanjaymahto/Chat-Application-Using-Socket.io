@@ -3,36 +3,87 @@ html
   head
     title Bit-Chat
     style.
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+      body {
+      font: 13px Helvetica, Arial;
+      }
+      form {
+      background: #000;
+      padding: 3px;
+      position: fixed;
+      bottom: 0;
+      width: 600px;
+      }
+      form input {
+      border: 0;
+      padding: 10px;
+      width: 489px;
+      margin-right: .5%;
+      }
+      form button {
+      width: 100px;
+      background: rgb(130, 224, 255);
+      border: none;
+      padding: 10px;
+      }
+      #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      }
+      #messages li {
+      padding: 5px 10px;
+      }
+      #messages li:nth-child(odd) {
+      background: #eee;
+      }
+      div.container {
+      width: 600px;
+      }
+      .chatbox {
+      position:center;
+      width: 600px;
+      border-style: solid;
+      box-shadow: 2;
+      overflow:scroll;
+      }
+      .onlineusers
+      {
+      float:center;
+      width:200px;
+      border-style: solid;
+      box-shadow: 2;
+      }
       #databasechats { list-style-type: none; margin: 0; padding: 0; }
       #databasechats li { padding: 5px 10px; }
       #databasechats li:nth-child(odd) { background: #eee; }
-  body
-    h1(align='center') Welcome To Chat Room
-    h2(align='center') Showing Last 10 chats
-    br
-    h2(align='center') #{nochat}
-  ul#databasechats
-    for chat in chats
-      li= chat.message
-    div
-      ul(align='center')
-        li#typingornot(style='font-style: bold;')
-      ul#messages
-    br
-    br
-    footer
-      div
+   body
+    .onlineUsers
+      h1(align='center')   Online Users:
+      ul
+        li#userName(align='center', style='font-style: bold;')
+    .chatbox
+      h1(align='center') Welcome To Chat Room
+      h2(align='center') Showing Last 10 chats
+      br
+      h2(align='center')
+      ul#databasechats
+        for chat in chats
+          li= chat.message
+        div
+          ul(align='center')
+            li#typingornot(style='font-style: bold;')
+          ul#messages
+        br
+        br
         form(action='')
           input#m(autocomplete='off')
           button Send
+        br
   script(src='http://cdn.socket.io/socket.io-1.4.5.js')
   script(src='http://code.jquery.com/jquery-1.11.1.js')
   script.
@@ -57,6 +108,10 @@ html
     socket.on('message', function(msg){
     $('#typingornot').html(msg);
     });
+    socket.on('usernames',function(names)
+    {
+    $('#userName').html($('<li>').text(names));
+    })
     //jQuery Script for typing function...
     var timeout;
     function timeoutFunction() {

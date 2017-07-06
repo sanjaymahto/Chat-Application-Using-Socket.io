@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 var mongoose = require('mongoose');
 var UserChat = require('./UserChat.js');
 var userChatModel = mongoose.model('UserChat')
+var usernames = [];
 // path is used the get the path of our files on the computer
 var path = require('path');
 
@@ -68,10 +69,19 @@ app.use(session({
 
 io.on('connection', function(socket){
 
+//function to show the users online...
+function updateuser()
+{
+  io.emit('usernames', usernames);
+
+}
+
   socket.on('user',function(data){
     socket.user = data;
     console.log(data+ " is online");
     socket.broadcast.emit('chat message', data+" is online");
+    usernames.push(socket.user);
+      updateuser();
   });
 
   
@@ -114,7 +124,11 @@ socket.on('message', function(msg){
   	 console.log(socket.user+" left the chat");
   	 socket.status = 0;
      socket.broadcast.emit('chat message', socket.user+" left the chat");
-     	//req.session.destroy();
+     	if(!socket.user){
+      return;
+    }
+    usernames.splice(usernames.indexOf(socket.user), 1);
+    updateuser();
   }); //end socket disconnected
 
 });
